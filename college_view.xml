@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+	<openerp>
+		<data>
+			<record model="ir.ui.view" id="college_tree_view">
+				<field name="name">college.tree</field>
+				<field name="model">college.college</field>
+				<field name="type">tree</field>
+				<field name="arch" type="xml">
+					<tree string="College">
+						<field name="collegeName"/>
+						<field name="principal"/>
+						<field name="address"/>
+						<field name="location"/>
+						<field name="landmarks"/>
+						<field name="ranking"/>
+						<field name="passPercentage"/>
+						<field name="date"/>
+						<field name="openingDate"/>
+						<field name="academicFee"/>
+						<field name="lecturersid"/>
+						<field name="state"/>
+					</tree>
+				</field>
+				
+			</record>
+
+			<record model="ir.ui.view" id="college_form_view">
+				<field name="name">college.form</field>
+				<field name="model">college.college</field>
+				<field name="type">form</field>
+				<field name="arch" type="xml">
+					<form string="College">
+						<group string="College Fields">
+						<field name="collegeName"/>
+						<field name="principal"/>
+						<field name="address"/>
+						<field name="location"/>
+						<field name="landmarks"/>
+						<field name="ranking"/>
+						<field name="passPercentage"/>
+						<field name="date"/>
+						<field name="openingDate"/>
+						<field name="academicFee"/>
+						<field name="lecturersid"/>
+						<field name="state"/>
+						</group>
+					</form>
+				</field>
+			</record>
+
+			<record model="ir.ui.view" id="lecturer_tree_view">
+				<field name="name">lecturer.tree</field>
+				<field name="model">lecturer</field>
+				<field name="type">tree</field>
+				<field name="arch" type="xml">
+					<tree string="lecturer">
+						<field name="name"/>
+						<field name="age"/>
+						<field name="address"/>
+						<field name="phone"/>
+						<field name="subject"/>
+						<field name="lecturer_id"/>
+					</tree>
+				</field>
+				
+			</record>
+
+			<record model="ir.ui.view" id="lecturer_form_view">
+				<field name="name">lecturer.form</field>
+				<field name="model">lecturer</field>
+				<field name="type">form</field>
+				<field name="arch" type="xml">
+					<form string="lecturer">
+						<group string="Lecturer Fields">
+						<field name="name"/>
+						<field name="age"/>
+						<field name="address"/>
+						<field name="phone"/>
+						<field name="subject"/>
+						<field name="lecturer_id"/>
+						</group>
+					</form>
+				</field>
+			</record>
+
+			<record model="ir.actions.act_window" id="action_college_form">
+				<field name="name">Details of the colleges</field>
+				<field name="res_model">college.college</field>
+			</record>
+			<record model="ir.actions.act_window" id="college_lecturers_action">
+				<field name="name">Details of the lecturers</field>
+				<field name="res_model">lecturer</field>
+			</record>
+
+			<menuitem name="College" id="college_menu"/>
+			<menuitem name="Lecturers" parent="college_menu" id='lecturer_id'/>
+			<menuitem name="LecturersDetails" parent="lecturer_id" id="lecturerid" action="college_lecturers_action"/>
+
+			<menuitem name="College" id="college_menu"/>
+			<menuitem name="Colleges" id="college_group_menu" parent="college_menu"/>
+			<menuitem name="EnggCollegeDetails" parent="college_group_menu" id="college_menu_mainform"/>
+			<menuitem name="Colleges By Location" id="1234" parent="college_menu_mainform" action="action_college_form"/>
+			<menuitem name="Colleges By ranking" id="id12" parent="college_menu_mainform" action="action_college_form"/>
+			<menuitem name="Colleges By name" id="id14" parent="college_menu_mainform" action="action_college_form"/>
+			<menuitem name="Colleges By rating" id="id1" parent="college_menu_mainform" action="action_college_form"/>
+			<menuitem name="Colleges By date of establishment" id="id2" parent="college_menu_mainform" action="action_college_form"/>
+
+			<menuitem name="MBACollegeDetails" parent="college_group_menu" id="id3"/>
+			<menuitem name="Colleges By Location" id="id4" parent="id3" action="action_college_form"/>
+			<menuitem name="Colleges By ranking" id="id5" parent="id3" action="action_college_form"/>
+			<menuitem name="Colleges By name" id="id6" parent="id3" action="action_college_form"/>
+			<menuitem name="Colleges By rating" id="id7" parent="id3" action="action_college_form"/>
+			<menuitem name="Colleges By date of establishment" id="id8" parent="id3" action="action_college_form"/>
+
+			<menuitem name="MCACollegeDetails" parent="college_group_menu" id="id4"/>
+			<menuitem name="Colleges By Location" id="id9" parent="id4" action="action_college_form"/>
+			<menuitem name="Colleges By ranking" id="id10" parent="id4" action="action_college_form"/>
+			<menuitem name="Colleges By name" id="id11" parent="id4" action="action_college_form"/>
+			<menuitem name="Colleges By rating" id="id12" parent="id4" action="action_college_form"/>
+			<menuitem name="Colleges By date of establishment" id="id13" parent="id4" action="action_college_form"/>
+		</data>
+	</openerp>
