@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="utf-8"?>
+	<openerp>
+		<data>
+
+<!-- student part starts here -->
+
+			<menuitem name="College" id="college_menu"/>
+			<menuitem name="Students" parent="college_menu" id='student_id'/>
+			<menuitem name="StudentDetails" parent="student_id" id="studentid"/>
+	<!-- student tree view -->
+			<record model="ir.ui.view" id="student_tree_view">
+				<field name="name">student.tree</field>
+				<field name="model">student</field>
+				<field name="type">tree</field>
+				<field name="arch" type="xml">
+					<tree string="student">
+						<field name="stud_profile_pic" widget="image"/>
+						<field name="name"/>
+						<field name="age"/>
+						<field name="address"/>
+						<field name="phone"/>
+						<field name="branch"/>
+						<field name="year"/>
+						<field name="student_id"/>
+						<field name="date_start"/>
+						<field name="date_stop"/>
+						<field name="feereimbrs"/>
+						<field name="fees"/>
+					</tree>
+				</field>
+				
+			</record>
+			
+	<!-- student form view -->
+			<record model="ir.ui.view" id="student_form_view">
+				<field name="name">student.form</field>
+				<field name="model">student</field>
+				<field name="type">form</field>
+				<field name="arch" type="xml">
+					<form string="student">
+						<group string="Student Fields">
+							<field name="stud_profile_pic" widget="image"/>
+							<field name="name"/>
+							<field name="age"/>
+							<field name="address"/>
+							<field name="phone"/>
+							<field name="branch"/>
+							<field name="year"/>
+							<field name="student_id"/>
+							<field name="date_start"/>
+							<field name="date_stop"/>
+							<field name="feereimbrs"/>
+							<field name="fees"/>
+						</group>
+					</form>
+				</field>
+			</record>
+			<record model="ir.actions.act_window" id="college_lecturers_student_action">
+				<field name="name">Details of the students</field>
+				<field name="res_model">student</field>
+			</record>
+			<menuitem  action="college_lecturers_student_action"/>
+
+	<!-- student search view -->
+			<record id="students_search_view" model="ir.ui.view">
+				<field name="name">student.search.view</field>
+				<field name="model">student</field>
+				<field name="type">search</field>
+				<field name="arch" type="xml">
+					<search string="student">
+						<field name="name"/>
+						<field name="age"/>
+						<field name="phone"/>	
+						<field name="branch"/>
+						<field name="address"/>
+						<field name="year"/>
+						<group expand="6" string="Group By">
+							<filter name="name" string="student" domain="[]" context="{'group_by':'name'}"/>
+							<filter name="age" string="student" domain="[]" context="{'group_by':'age'}"/>
+							<filter name="phone" string="student" domain="[]" context="{'group_by':'phone'}"/>
+							<filter name="branch" string="student" domain="[]" context="{'group_by':'branch'}"/>
+							<filter name="address" string="student" domain="[]" context="{'group_by':'address'}"/>
+							<filter name="year" string="student" domain="[]" context="{'group_by':'year'}"/>
+						</group>
+				  	</search> 
+				  </field>
+			</record>
+			<record id="view_session_search" model="ir.actions.act_window">
+	            <field name="name">search view</field>
+	            <field name="res_model">student</field>
+        	</record>
+        	<menuitem  action="view_session_search"/>
+
+	 <!-- student calendar view -->
+			<record id="lichcalendar" model="ir.ui.view">
+	            <field name="name">student.calendar.view</field>
+	            <field name="model">student</field>
+	            <field name="type">calendar</field>
+	            <field name="arch" type="xml">
+	                    <calendar color="name" date_start="date_start" date_stop="date_stop">
+	                        <field name="name"/>
+							<field name="age"/>
+							<field name="address"/>
+							<field name="phone"/>
+							<field name="branch"/>
+							<field name="year"/>
+							<field name="student_id"/>
+							<field name="date_start"/>
+							<field name="date_stop"/>
+							<field name="feereimbrs"/>
+							<field name="fees"/>
+	                    </calendar>
+	            </field>
+        	</record>
+
+        	<record id="action_lich" model="ir.actions.act_window">
+	            <field name="name">calendar view</field>
+	            <field name="res_model">student</field>
+	            <field name="view_mode">tree,form,calendar,graph,gantt,kanban</field>
+        	</record>
+        	
+        	<menuitem  action="action_lich"/>
+
+	<!-- student graph view -->
+        	<record model="ir.ui.view" id="view_graph">
+        		<field name="name">student.graph.view</field>
+        		<field name="model">student</field>
+        		 <field name="view_mode">graph</field>
+				<field name="arch" type="xml">
+					<graph string="Graph View" type="bar" orientation="vertical">
+						<field name="name"/>
+						<field name="age" operator="+"/>
+					</graph>
+				</field>
+			</record>
+			<record id="view_session_graph" model="ir.actions.act_window">
+	            <field name="name">graph view</field>
+	            <field name="res_model">student</field>
+	            <field name="view_mode">tree,form,calendar,graph,gantt,kanban</field>
+        	</record>
+        	<menuitem action="view_session_graph"/>
+
+	<!-- student gantt view -->
+			<record model="ir.ui.view" id="view_gantt">
+        		<field name="name">student.gantt.view</field>
+        		<field name="model">student</field>
+        		<field name="type">gantt</field>
+				<field name="arch" type="xml">
+					<gantt color="student_id"  date_start="date_start" date_stop="date_stop" string="Tasks">
+					    <level object="student" link="student_id" domain="[]">
+					    	<field name="name"/>
+					    </level>
+					</gantt>
+				</field>
+			</record>
+			<record id="view_session_gantt" model="ir.actions.act_window">
+	            <field name="name">gantt view</field>
+	            <field name="res_model">student</field>
+	             <field name="view_mode">gantt</field>
+        	</record>
+        	<menuitem  action="view_session_gantt"/>
+
+	<!-- student kanban view -->
+			<record model="ir.ui.view" id="student kanban view">
+			    <field name="name">student.Kanban.view</field>
+			    <field name="model">student</field>
+			    <field name="arch" type="xml">
+			        <kanban>
+			            <field name="name"/>
+			            <field name="branch"/>
+			            <field name="year"/>
+			            <field name="age"/>
+			            <field name="address"/>
+			            <field name="phone"/>
+			            <templates>
+	                    	<t t-name="kanban-box">
+	                               <div class="oe_kanban_vignette oe_semantic_html_override">
+	                                <div class="oe_student_desc">
+	                          			<t>
+                                            <img t-att-src='_s + "image.jpg"' class="oe_kanban_image"/>
+                                        </t>
+	                                    <ul>
+	                                        <li >name :<field name="name"/></li>
+	                                        
+	                                        <li>branch :<field name="branch"/></li>
+	                                        <li>year :<field name="year"/></li>
+	                                        <li>age :<field name="age"/></li>
+	                                        <li>address :<field name="address"/></li>
+	                                        <li>phone :<field name="phone"/></li>
+	                                    </ul>
+	                                </div>
+	                            </div>
+	                        </t>
+                   		</templates>
+			        </kanban>
+			    </field>
+			</record>
+        	<record id="view_session_kanban" model="ir.actions.act_window">
+	            <field name="name">kanban view</field>
+	            <field name="res_model">student</field>
+	            <field name="view_mode">tree,form,calendar,graph,gantt,kanban</field>
+        	</record>
+      		<menuitem  action="view_session_kanban"/>
+<!-- student part ends here -->
+
+
+	
+		</data>
+	</openerp>

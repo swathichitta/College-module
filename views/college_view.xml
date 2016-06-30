@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+	<openerp>
+		<data>
+		
+
+<!-- college.collge part starts here -->
+			<menuitem name="College" id="college_menu"/>
+			<menuitem name="Colleges" id="college_group_menu" parent="college_menu"/>
+			<menuitem name="College Details" id="collegeDetails_group_id" parent="college_group_menu"/>
+
+			<record model="ir.ui.view" id="college_tree_view">
+				<field name="name">college.tree</field>
+				<field name="model">college.college</field>
+				<field name="type">tree</field>
+				<field name="arch" type="xml">
+					<tree string="College">
+						<field name="collegeName"/>
+						<field name="principal"/>
+						<field name="address"/>
+						<field name="location"/>
+						<field name="landmarks"/>
+						<field name="ranking"/>
+						<field name="passPercentage"/>
+						<field name="date"/>
+						<field name="openingDate"/>
+						<field name="academicFee"/>
+						<field name="lecturersid"/>
+						<field name="state"/>
+					</tree>
+				</field>
+				
+			</record>
+
+
+
+			<record model="ir.ui.view" id="college_form_view">
+				<field name="name">college.form</field>
+				<field name="model">college.college</field>
+				<field name="type">form</field>
+				<field name="arch" type="xml">
+					<form string="College">
+						<group string="College Fields">
+						<field name="collegeName"/>
+						<field name="principal"/>
+						<field name="address"/>
+						<field name="location"/>
+						<field name="landmarks"/>
+						<field name="ranking"/>
+						<field name="passPercentage"/>
+						<field name="date"/>
+						<field name="openingDate"/>
+						<field name="academicFee"/>
+						<field name="lecturersid"/>
+						<field name="state"/>
+						</group>
+					</form>
+				</field>
+			</record>
+
+			<record model="ir.actions.act_window" id="action_college_form">
+				<field name="name">Details of the colleges</field>
+				<field name="res_model">college.college</field>	
+			</record>
+
+			
+			<menuitem action="action_college_form"/>
+<!-- college.college part ends here -->
+
+			
+		</data>
+	</openerp>

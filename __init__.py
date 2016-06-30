@@ -1,1 +1,3 @@
-import college,lecturers
+import college_view
+import lecturers_view
+import students_view

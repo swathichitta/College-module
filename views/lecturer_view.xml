@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="utf-8"?>
+	<openerp>
+		<data>
+
+
+
+<!-- here start lecturers part -->
+			<menuitem name="College" id="college_menu"/>
+			<menuitem name="Lecturers" parent="college_menu" id='lecturer_id'/>
+			<menuitem name="LecturersDetails" parent="lecturer_id" id="lecturerid"/> 
+<!-- lecturer tree view -->
+			<record model="ir.ui.view" id="lecturer_tree_view">
+				<field name="name">lecturer.tree</field>
+				<field name="model">lecturer</field>
+				<field name="type">tree</field>
+				<field name="arch" type="xml">
+					<tree string="lecturer">
+						<field name="name"/>
+						<field name="age"/>
+						<field name="address"/>
+						<field name="phone"/>
+						<field name="subject" />
+						<field name="lecturer_id"/>
+						<field name="lect_id"/>
+						<field name="datestart"/>
+						<field name="datestop"/>
+						<field name="branch2teach"/>
+						<field name="gender"/>
+						<field name="married"/>
+					</tree>
+				</field>
+			</record>
+
+<!-- lecturer form view -->
+			<record model="ir.ui.view" id="lecturer_form_view">
+				<field name="name">lecturer.form</field>
+				<field name="model">lecturer</field>
+				<field name="type">form</field>
+				<field name="arch" type="xml">
+					<form string="lecturer">
+						<group string="Lecturer Fields">
+						<field name="lec_profile_pic" widget="image"/>
+						<field name="name"/>
+						<field name="age"/>
+						<field name="address"/>
+						<field name="phone"/>
+						<field name="subject"/>
+						<field name="lecturer_id"/>
+						<field name="lect_id"/>
+						<field name="datestart"/>
+						<field name="datestop"/>
+						<field name="branch2teach"/>
+						<field name="gender"/>
+						<field name="married"/>
+						</group>
+					</form>
+				</field>
+			</record>
+<!-- lecturer search view -->
+			<record id="lecturer_search_view" model="ir.ui.view">
+				<field name="name">lecturer.search.view</field>
+				<field name="model">lecturer</field>
+				<field name="type">search</field>
+				<field name="arch" type="xml">
+				  	<search string="lecturer">
+						<field name="name"/>
+						<field name="age"/>
+						<field name="address"/>
+						<field name="phone"/>
+						<field name="subject"/>
+						<field name="datestart"/>
+						<field name="datestop"/>
+						<field name="lecturer_id"/>
+						<field name="lect_id"/>
+						<group expand="5" string="Group By">
+							<filter name="name" string="lecturer" domain="[]" context="{'group_by':'name'}"/>
+							<filter name="age" string="lecturer" domain="[]" context="{'group_by':'age'}"/>
+							<filter name="phone" string="lecturer" domain="[]" context="{'group_by':'phone'}"/>
+							<filter name="address" string="lecturer" domain="[]" context="{'group_by':'address'}"/>
+							<filter name="subject" string="lecturer" domain="[]" context="{'group_by':'subject'}"/>
+							<filter name="datestart" string="lecturer" domain="[]" context="{'group_by':'datestart'}"/>
+							<filter name="datestop" string="lecturer" domain="[]" context="{'group_by':'datestop'}"/>
+							<filter name="lecturer_id" string="lecturer" domain="[]" context="{'group_by':'lecturer_id'}"/>
+							<filter name="lect_id" string="lecturer" domain="[]" context="{'group_by':'lect_id'}"/>
+						</group>
+					</search>
+				</field>
+			</record>
+
+			<record model="ir.actions.act_window" id="college_lecturers_action">
+				<field name="name">Details of the lecturers</field>
+				<field name="res_model">lecturer</field>
+			</record>
+			<menuitem action="college_lecturers_action"/>
+
+
+<!-- lecturer calendar view -->
+			<record id="lectcalendar" model="ir.ui.view">
+	            <field name="name">lecturer.calendar.view</field>
+	            <field name="model">lecturer</field>
+	            <field name="type">calendar</field>
+	            <field name="arch" type="xml">
+	                    <calendar color="name" date_start="datestart" date_stop="datestop">
+		                        <field name="name"/>
+								<field name="age"/>
+								<field name="address"/>
+								<field name="phone"/>
+								<field name="subject"/>
+								<field name="datestart"/>
+								<field name="datestop"/>
+								<field name="lecturer_id"/>
+								<field name="lect_id"/>
+								<field name="branch2teach"/>
+								<field name="gender"/>
+								<field name="married"/>
+	                    </calendar>
+	            </field>
+        	</record>
+
+        	<record id="action_lect_cal" model="ir.actions.act_window">
+	            <field name="name">calendar view</field>
+	            <field name="res_model">lecturer</field>
+	            <field name="view_mode">tree,form,calendar,graph,gantt,kanban</field>
+        	</record>
+        	
+        	<menuitem name="LecturersDetails" parent="lecturer_id" id="lecturerid" action="action_lect_cal"/>
+
+<!--lecturer graph view -->
+        	<record model="ir.ui.view" id="lect_graph">
+        		<field name="name">lecturer_view.graph.view</field>
+        		<field name="model">lecturer</field>
+        		 <field name="view_mode">graph</field>
+				<field name="arch" type="xml">
+					<graph string="Graph View" type="bar" orientation="vertical">
+						<field name="name"/>
+						<field name="age" operator="+"/>
+					</graph>
+				</field>
+			</record>
+			<record id="lect_session_graph" model="ir.actions.act_window">
+	            <field name="name">graph view</field>
+	            <field name="res_model">lecturer</field>
+	            <field name="view_mode">tree,form,calendar,graph,gantt,kanban</field>
+        	</record>
+        	<menuitem name="LecturersDetails" parent="lecturer_id" id="lecturerid" action="lect_session_graph"/>
+
+<!-- lecturer gantt view -->
+			<record model="ir.ui.view" id="lect_gantt">
+        		<field name="name">lecturer.gantt.view</field>
+        		<field name="model">lecturer</field>
+        		<field name="type">gantt</field>
+				<field name="arch" type="xml">
+					<gantt color="lecturer_id"  date_start="date_start" date_stop="date_stop" string="Tasks">
+					    <level object="lecturer" link="lecturer_id" domain="[]">
+					    	<field name="name"/>
+					    </level>
+					</gantt>
+				</field>
+			</record>
+			<record id="lect_session_gantt" model="ir.actions.act_window">
+	            <field name="name">gantt view</field>
+	            <field name="res_model">lecturer</field>
+	             <field name="view_mode">gantt</field>
+        	</record>
+        	<menuitem name="LecturersDetails" parent="lecturer_id" id="lecturerid" action="lect_session_gantt"/>
+
+<!-- lecturer kanban view -->
+			<record model="ir.ui.view" id="lecturer kanban view">
+			    <field name="name">lecturer.Kanban.view</field>
+			    <field name="model">lecturer</field>
+			    <field name="arch" type="xml">
+			        <kanban>
+			        	<sheet>
+			            <field name="name"/>
+			            <field name="subject"/>
+			            <field name="age"/>
+			            <field name="address"/>
+			            <field name="phone"/>
+			            <field name="datestart"/>
+						<field name="datestop"/>
+			            </sheet>
+			            <templates>
+	                    	<t t-name="kanban-box">
+	                               <div class="oe_kanban_vignette oe_semantic_html_override">
+	                                <div class="oe_student_desc">
+	                          			<t>
+                                            <img t-att-src='_s + "image.jpg"' class="oe_kanban_image"/>
+                                        </t>
+	                                    <ul>
+	                                    	<sheet>
+		                                        <li >name :<field name="name"/></li>
+		                                        <li>subject :<field name="subject"/></li>
+		                                        <li>age :<field name="age"/></li>
+		                                        <li>address :<field name="address"/></li>
+		                                        <li>phone :<field name="phone"/></li>
+		                                        <li>datestart :<field name="datestart"/></li>
+		                                        <li>datestop :<field name="datestop"/></li>
+		                                    </sheet>
+	                                    </ul>
+	                                </div>
+	                            </div>
+	                        </t>
+                   		</templates>
+			        </kanban>
+			    </field>
+			</record>
+        	<record id="lect_session_kanban" model="ir.actions.act_window">
+	            <field name="name">kanban view</field>
+	            <field name="res_model">lecturer</field>
+	            <field name="view_mode">tree,form,calendar,graph,gantt,kanban</field>
+        	</record>
+      		<menuitem name="LecturersDetails" parent="lecturer_id" id="lecturerid"  action="lect_session_kanban"/>
+<!-- lecturer part ends here -->
+
+
+			
+		</data>
+	</openerp>
